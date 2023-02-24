@@ -1,9 +1,5 @@
-require 'rspec/expectations'
-
 module PageObjects
   class RegistrationPage
-    include RSpec::Matchers
-
     private def form_text_input(field_label); @driver.find_element(xpath: "//label[text()='#{field_label}']/following-sibling::input"); end
     private def form_text_area(field_label); @driver.find_element(xpath: "//label[text()='#{field_label}']/following-sibling::textarea"); end
     private def form_clickable_field(field_label, selected_value); @driver.find_element(xpath: "//label[text()='#{field_label}']/../descendant::label[contains(text(), '#{selected_value}')]"); end
@@ -25,15 +21,11 @@ module PageObjects
       return @wait.until{error_fieldsets}.length
     end
 
-    def assert_error_messages_count_decreased_from(initial_count)
-      expect(error_messages_count).to be (initial_count-1)
-    end
-
     def fill_first_name
       @wait.until{form_text_input("First Name:")}.send_keys("Joe")
     end
 
-    def assert_form_submitted
+    def form_submitted?
       @wait.until{form_text_input("First Name:").text == ""}
     end
 

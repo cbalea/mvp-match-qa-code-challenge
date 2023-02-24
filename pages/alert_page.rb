@@ -1,7 +1,5 @@
 module PageObjects
   class AlertPage
-    include RSpec::Matchers
-
     private def alert_button_iframe; @driver.find_element(class: "demo-frame"); end
     private def trigger_button; @driver.find_element(xpath: "//button[contains(text(),'Click the button to display an alert box:')]"); end
 
@@ -23,8 +21,13 @@ module PageObjects
       @driver.switch_to.default_content
     end
 
-    def assert_alert_closed
-      expect { @driver.switch_to.alert }.to raise_error(Selenium::WebDriver::Error::NoSuchAlertError)
+    def alert_exists?
+      begin
+        @driver.switch_to.alert
+        return true
+      rescue Selenium::WebDriver::Error::NoSuchAlertError
+        return false
+      end
     end
   end
 end
