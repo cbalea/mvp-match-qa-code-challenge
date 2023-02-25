@@ -1,3 +1,5 @@
+require_relative 'helpers'
+
 module PageObjects
   class AlertPage
     private def alert_button_iframe; @driver.find_element(class: "demo-frame"); end
@@ -22,12 +24,7 @@ module PageObjects
     end
 
     def alert_exists?
-      begin
-        @driver.switch_to.alert
-        return true
-      rescue Selenium::WebDriver::Error::NoSuchAlertError
-        return false
-      end
+      return try_action_successful?{ @driver.switch_to.alert }
     end
   end
 end

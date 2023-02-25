@@ -9,5 +9,9 @@ RSpec.describe 'Automation Playground page' do
     playground_page.select_and_validate_programming_language
     playground_page.select_and_validate_automation_framework
     playground_page.select_and_validate_primary_skill
+    playground_page.select_and_validate_multiple_languages
+    playground_page.type_in_and_validate_textarea
+    expect(playground_page.mandatory_skill_input_disabled?).to be true
+    playground_page.validate_speaks_german
   end
 end
