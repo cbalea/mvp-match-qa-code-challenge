@@ -8,3 +8,8 @@ def try_action_successful?(&action)
     return false
   end
 end
+
+# This method implicitly validates that the file exists, throwing an error if it doesn't.
+private def absolute_filepath(file)
+  File.expand_path(file)
+end

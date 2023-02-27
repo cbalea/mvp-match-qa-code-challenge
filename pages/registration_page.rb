@@ -1,5 +1,8 @@
+require_relative 'helpers'
+
 module PageObjects
   class RegistrationPage
+    IMAGE_RELATIVE_PATH = 'assets/white-rectangle.png'
     private def form_text_input(field_label); @driver.find_element(xpath: "//label[text()='#{field_label}']/following-sibling::input"); end
     private def form_text_area(field_label); @driver.find_element(xpath: "//label[text()='#{field_label}']/following-sibling::textarea"); end
     private def form_clickable_field(field_label, selected_value); @driver.find_element(xpath: "//label[text()='#{field_label}']/../descendant::label[contains(text(), '#{selected_value}')]"); end
@@ -29,11 +32,6 @@ module PageObjects
       @wait.until{form_text_input("First Name:").text == ""}
     end
 
-    # This method implicitly validates that the file exists, throwing an error if it doesn't.
-    private def image_filepath
-      File.expand_path('assets/white-rectangle.png')
-    end
-
     def fill_form
       @wait.until{form_text_input("First Name:")}.send_keys("Joe")
       @wait.until{form_text_input("Last Name:")}.send_keys("Testlio")
@@ -46,7 +44,7 @@ module PageObjects
       @wait.until{form_text_input("Phone Number:")}.send_keys("123456")
       @wait.until{form_text_input("Username:")}.send_keys("tester")
       @wait.until{form_text_input("E-mail:")}.send_keys("test@test.com")
-      @wait.until{form_text_input("Your Profile Picture")}.send_keys(image_filepath)
+      @wait.until{form_text_input("Your Profile Picture")}.send_keys(absolute_filepath(IMAGE_RELATIVE_PATH))
       @wait.until{form_text_area("About Yourself")}.send_keys("My name is Joe and I'm a tester.")
       @wait.until{form_text_input("Password:")}.send_keys("password")
       @wait.until{form_text_input("Confirm Password:")}.send_keys("password")
