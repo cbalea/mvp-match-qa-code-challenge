@@ -5,8 +5,14 @@ require 'webdrivers'
 RSpec.configure do |config|
   config.around(:example) do |example|
     # @driver = Selenium::WebDriver.for :chrome
-    caps = Selenium::WebDriver::Options.chrome
-    @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:9515/wd/hub', desired_capabilities: caps
+
+    # options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--ignore-certificate-errors')
+    # options.add_argument('--disable-popup-blocking')
+    # options.add_argument('--disable-translate')
+    # driver = Selenium::WebDriver.for :chrome, options: options
+    # caps = Selenium::WebDriver::Options.chrome
+    @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:9515/wd/hub', desired_capabilities: :chrome
     @wait = Selenium::WebDriver::Wait.new(timeout: 10)
     begin
       example.run
