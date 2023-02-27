@@ -12,7 +12,7 @@ RSpec.configure do |config|
     options.add_argument('--disable-translate')
     # driver = Selenium::WebDriver.for :chrome, options: options
     # caps = Selenium::WebDriver::Options.chrome
-    @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:9515/wd/hub', desired_capabilities: :chrome, options: options
+    @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:9515/wd/hub', options: options
     @wait = Selenium::WebDriver::Wait.new(timeout: 10)
     begin
       example.run
