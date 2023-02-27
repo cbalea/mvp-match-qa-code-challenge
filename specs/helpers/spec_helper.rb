@@ -10,9 +10,8 @@ RSpec.configure do |config|
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--disable-popup-blocking')
     options.add_argument('--disable-translate')
-    # driver = Selenium::WebDriver.for :chrome, options: options
-    # caps = Selenium::WebDriver::Options.chrome
     @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:9515/wd/hub', options: options
+
     @wait = Selenium::WebDriver::Wait.new(timeout: 10)
     begin
       example.run

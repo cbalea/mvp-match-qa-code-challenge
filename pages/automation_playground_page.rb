@@ -86,7 +86,9 @@ module PageObjects
     end
 
     def validate_upload_cv
-      input("upload_cv").send_keys(absolute_filepath(IMAGE1_RELATIVE_PATH))
+      filepath = absolute_filepath(IMAGE1_RELATIVE_PATH)
+      print filepath
+      input("upload_cv").send_keys(filepath)
       @wait.until{ output(IMAGE1_RELATIVE_PATH.split("/")[1]).displayed? }
     end
 
