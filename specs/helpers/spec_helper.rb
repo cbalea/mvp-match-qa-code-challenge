@@ -4,14 +4,15 @@ require 'webdrivers'
 
 RSpec.configure do |config|
   config.around(:example) do |example|
-    # @driver = Selenium::WebDriver.for :chrome
 
-    options = Selenium::WebDriver::Chrome::Options.new(w3c: false)
-    # options.add_argument('--ignore-certificate-errors')
-    # options.add_argument('--disable-popup-blocking')
-    # options.add_argument('--disable-translate')
-    # options.add_argument('--w3c=false')
-    @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:9515/wd/hub', options: options
+    if(ENV['ENVIRONMENT'])
+      options = Selenium::WebDriver::Chrome::Options.new
+      options.add_argument('--w3c=false')
+      # still doesn't fix https://stackoverflow.com/questions/58296774/ruby-selenium-webdriver-3-142-6-unable-to-upload-file-due-to-seleniumwebdriv
+      @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:9515/wd/hub', options: options
+    else
+      @driver = Selenium::WebDriver.for :chrome
+    end
 
     @wait = Selenium::WebDriver::Wait.new(timeout: 10)
     begin
