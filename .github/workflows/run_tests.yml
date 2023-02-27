@@ -19,6 +19,8 @@ jobs:
 
       - name: Setup Chrome driver
         uses: nanasess/setup-chromedriver@v1
+        with:
+          chromedriver-version: '110.0.5481.77'
 
       - name: Start Chrome driver
         run: |
